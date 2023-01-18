@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        node('agent-ubuntu')
+    }
     stages {
         stage('git-pull') {
             steps {
