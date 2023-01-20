@@ -19,7 +19,7 @@ pipeline {
         }
         stage('push-artifact') {
             steps { 
-             withAWS(credentials: 'shubham', region: 'ap-south-1')
+            //  withAWS(credentials: 'shubham', region: 'ap-south-1')
              sh 'aws s3 ls'
                 // sh ''' sudo apt-get install unzip -y
                     // curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
