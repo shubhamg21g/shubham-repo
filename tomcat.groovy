@@ -24,7 +24,7 @@ pipeline {
                     // unzip awscliv2.zip
                     // sudo ./aws/install
                 // '''
-                 sh 'sudo mv /var/lib/jenkins/workspace/student_app/target/studentapp-2.2-SNAPSHOT.war /home/ubuntu/student-${BUILD_ID}.war'
+                 sh 'sudo mv /home/ubuntu/workspace/jenkins/target/studentapp-2.2-SNAPSHOT.war /home/ubuntu/student-${BUILD_ID}.war'
             }
         }
         stage('deploy') {
