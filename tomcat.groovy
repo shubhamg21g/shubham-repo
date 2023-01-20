@@ -20,10 +20,10 @@ pipeline {
         stage('push-artifact') {
             steps {
                 sh ''' sudo apt-get install unzip -y
-                    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-                    unzip awscliv2.zip
-                    sudo ./aws/install 
-                    sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
+                    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" -y
+                    unzip awscliv2.zip -y
+                    sudo ./aws/install -y
+                    sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update -y
                 '''
             }
         }
