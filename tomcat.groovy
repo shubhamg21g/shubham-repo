@@ -25,10 +25,9 @@ pipeline {
                     // unzip awscliv2.zip
                     // sudo ./aws/install
                 // '''
-                //  sh 'sudo mv /home/ubuntu/workspace/jenkins/target/studentapp-2.2-SNAPSHOT.war /home/ubuntu/student-${BUILD_ID}.war'
-                 sh 'aws s3 cp /home/ubuntu/student-13.war s3://shubham.goutam --region ap-south-1'
-
-            }
+                 sh 'sudo mv /home/ubuntu/workspace/jenkins/target/studentapp-2.2-SNAPSHOT.war /home/ubuntu/student-${BUILD_ID}.war'
+                 sh 'aws s3 cp /home/ubuntu/student-${BUILD_ID}.war s3://shubham.goutam'
+           }
         }
         stage('deploy') {
             steps {
