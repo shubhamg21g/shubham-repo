@@ -49,7 +49,7 @@ pipeline {
                         sudo cp -rv studentapp.war /opt/apache-tomcat-8.5.85/webapps/
                         sudo sh /opt/apache-tomcat-8.5.85/bin/startup.sh
                     '''
-                }
+                // }
             }
         }
      }            
