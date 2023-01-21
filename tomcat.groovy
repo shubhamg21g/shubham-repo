@@ -34,9 +34,10 @@ pipeline {
         }
         stage('tomcat-deploy'){
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'tomcat-server', keyFileVariable: 'tomcat-server', usernameVariable: 'tomcat')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: 'new', keyFileVariable: 'new', usernameVariable: 'ubuntu')]) {
+
                     sh'''
-                    ssh -i ${tomcat-server} -o StrictHostKeyChecking=no ubuntu@43.205.143.41<<EOF
+                    ssh -i ${new} -o StrictHostKeyChecking=no ubuntu@43.205.143.41<<EOF
                     '''
                 }
             }
