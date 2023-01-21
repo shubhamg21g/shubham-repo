@@ -36,7 +36,7 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'tomcat-server', keyFileVariable: 'tomcat-server', usernameVariable: 'tomcat')]) {
                     sh'''
-                    ssh -i ${tomcat} -o StrictHostKeyChecking=no ubuntu@43.205.143.41<<EOF
+                    ssh -i ${tomcat-server} -o StrictHostKeyChecking=no ubuntu@43.205.143.41<<EOF
                     '''
                 }
             }
