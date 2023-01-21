@@ -32,7 +32,7 @@ pipeline {
         }
         stage('tomcat-deploy') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'tomcat-server', keyFileVariable: 'tomcat-server', usernameVariable: 'tomcat')]) {
+                // withCredentials([sshUserPrivateKey(credentialsId: 'tomcat-server', keyFileVariable: 'tomcat-server', usernameVariable: 'tomcat')]) {
                     sh'''
                         ssh -i ${tomcat-server} -o StrictHostKeyChecking=no ubuntu@43.205.143.41<<EOF
                         sudo apt-get install unzip -y
