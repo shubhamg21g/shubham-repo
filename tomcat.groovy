@@ -19,31 +19,29 @@ pipeline {
         }
         stage('push-artifact'){
             steps { 
-             withAWS(credentials: 'shubham', region: 'ap-south-1') {
              sh 'aws s3 ls'
                 sh '''
                  sudo apt-get install unzip -y
-                # curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-                # unzip awscliv2.zip
-                # sudo ./aws/install
+                #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+                #unzip awscliv2.zip
+                #sudo ./aws/install
                  sudo mv /home/ubuntu/workspace/jenkins/target/studentapp-2.2-SNAPSHOT.war /home/ubuntu/student-${BUILD_ID}.war
                  aws s3 cp /home/ubuntu/student-${BUILD_ID}.war s3://shubham.goutam
                  '''
-             }
            }
         }
         stage('tomcat-deploy'){
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'new', keyFileVariable: 'new', usernameVariable: 'ubuntu')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: 'tomcat-server', keyFileVariable: 'new', usernameVariable: 'ubuntu')]) {
 
                     sh'''
-                    ssh -i ${new} -o StrictHostKeyChecking=no ubuntu@43.205.143.41<<EOF
+                    ssh -i ${new} -o StrictHostKeyChecking=no ubuntu@43.205.198.15<<EOF
                     sudo apt-get update -y
                     sudo apt-get install unzip -y
                         sudo apt-get install openjdk-11-jre -y
-                        #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-                        #unzip awscliv2.zip
-                        #sudo ./aws/install
+                        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+                        unzip awscliv2.zip
+                        sudo ./aws/install
                         aws s3 cp s3://shubham.goutam/student-${BUILD_ID}.war .
                         curl -O https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.85/bin/apache-tomcat-8.5.85.tar.gz
                         sudo tar -xvf apache-tomcat-8.5.85.tar.gz -C /opt/
