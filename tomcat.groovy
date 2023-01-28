@@ -2,6 +2,9 @@ pipeline {
     agent {
         node ('agent-ec2')
     }
+    parameters {
+  booleanParam description: '0.0.1', name: 'verion'
+}
     stages {
         stage('git-pull'){
             steps {
