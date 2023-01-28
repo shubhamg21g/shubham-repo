@@ -2,8 +2,8 @@ pipeline {
     agent {
         node ('agent-ec2')
     }
-    parameters {
-  booleanParam description: '0.0.1', name: 'verion'
+   parameters {
+  string defaultValue: '0.0.1', name: 'version'
 }
     stages {
         stage('git-pull'){
@@ -28,8 +28,8 @@ pipeline {
                 #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
                 #unzip awscliv2.zip
                 #sudo ./aws/install
-                 sudo mv /home/ubuntu/workspace/jenkins/target/studentapp-2.2-SNAPSHOT.war /home/ubuntu/student-${verion}.war
-                 aws s3 cp /home/ubuntu/student-${verion}.war s3://shubham.goutam
+                 sudo mv /home/ubuntu/workspace/jenkins/target/studentapp-2.2-SNAPSHOT.war /home/ubuntu/student-${version}.war
+                 aws s3 cp /home/ubuntu/student-${version}.war s3://shubham.goutam
                  '''
            }
         }
@@ -45,11 +45,11 @@ pipeline {
                         #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
                         #unzip awscliv2.zip
                         #sudo ./aws/install
-                        aws s3 cp s3://shubham.goutam/student-${verion}.war .
+                        aws s3 cp s3://shubham.goutam/student-${version}.war .
                         curl -O https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.85/bin/apache-tomcat-8.5.85.tar.gz
                         sudo tar -xvf apache-tomcat-8.5.85.tar.gz -C /opt/
                         sudo sh /opt/apache-tomcat-8.5.85/bin/shutdown.sh
-                        sudo cp -rv student-${verion}.war studentapp.war
+                        sudo cp -rv student-${version}.war studentapp.war
                         sudo cp -rv studentapp.war /opt/apache-tomcat-8.5.85/webapps/
                         sudo sh /opt/apache-tomcat-8.5.85/bin/startup.sh
                     '''
